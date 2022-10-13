@@ -131,6 +131,31 @@ class TimeUtils {
     return formatResult;
   }
 
+  /// 它计算两次之间的时间差。
+  /// Args:
+  ///   nowTime: 当前时间
+  ///   endTime: 倒计时的结束时间，以毫秒为单位
+  ///   return 01:12:10
+  static String caculateTime(nowTime, endTime) {
+    var surplus = endTime.difference(nowTime);
+    int day = (surplus.inSeconds ~/ 3600) ~/ 24;
+    int hour = (surplus.inSeconds ~/ 3600) % 24;
+    int minute = surplus.inSeconds % 3600 ~/ 60;
+    int second = surplus.inSeconds % 60;
+
+    String hourString = "00";
+    String minString = "00";
+    String secondString = "00";
+
+    hourString = (day*24 + hour).toString();
+    if(int.parse(hourString) < 10){
+      hourString = "0$hourString";
+    }
+    minString = minute < 10 ?  "0$minute" :minute.toString();
+    secondString = second < 10 ?  "0$second" :second.toString();
+    return "$hourString:$minString:$secondString";
+  }
+
   ///1.获取从某一天开始到某一天结束的所有的中间日期，例如输入 startTime:2019:07:31  endTime:2019:08:31  就会返回所有的中间天数。
   ///startTime和endTime格式如下都可以
   ///使用:    List<String> mdata=DateUtils.instance.getTimeBettwenStartTimeAndEnd(startTime:"2019-07-11",endTime:"2019-08-29",format:"yyyy年MM月dd");
@@ -194,8 +219,6 @@ class TimeUtils {
   static List<String> getTimeStartTimeAndEnd(
       {startTime: String, dayNumber: int, format: String}) {
     List<String> mDataList = [];
-    //记录往后每一天的时间搓，用来和最后一天到做对比。这样就能知道什么时候停止了。
-    int allTimeEnd = 0;
     //记录当前到个数(相当于天数)
     int currentFlag = 0;
     DateTime startData = DateTime.parse(startTime);
@@ -263,8 +286,6 @@ class TimeUtils {
   static List<TimeData> getTimeStartTimeAndEndTime(
       {startTime: int, dayNumber: int, format: String}) {
     List<TimeData> mDataList = [];
-    //记录往后每一天的时间搓，用来和最后一天到做对比。这样就能知道什么时候停止了。
-    int allTimeEnd = 0;
     //记录当前到个数(相当于天数)
     int currentFlag = 0;
     var mothFormatFlag =  DateFormat(format);
@@ -340,14 +361,11 @@ class TimeUtils {
   ///timeSamp:时间戳 单位（毫秒）
   ///format:想要的格式  "yyyy年MM月dd hh:mm:ss"  "yyy?MM?dd  hh?MM?dd" "yyyy:MM:dd"
   static DateTime getEndMonthDate(int year, int month) {
-    var dataFormat =  DateFormat();
-    var dateTime =  DateTime.fromMillisecondsSinceEpoch(month);
     var dataNextMonthData =  DateTime(year, month + 1, 1);
     int nextTimeSamp =
         dataNextMonthData.millisecondsSinceEpoch - 24 * 60 * 60 * 1000;
     //取得了下一个月1号码时间戳
     var dateTimeeee =  DateTime.fromMillisecondsSinceEpoch(nextTimeSamp);
-    String formatResult = dataFormat.format(dateTimeeee);
     return dateTimeeee;
   }
 
