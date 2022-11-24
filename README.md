@@ -10,7 +10,7 @@ Update pubspec.yaml and add the following line to your dependencies.
 
 ```yaml
 dependencies:
-  h_basic_utils: ^0.0.4
+  h_basic_utils: ^0.0.6
 ```
 
 1. math_tils
@@ -25,5 +25,6 @@ dependencies:
 3. string_utils
    1. 包含解决字符串省略提前太多问题
    2. md5加密
+   3. 计算Text的size
 4. time_utils
    1. 常用的时间方法的工具栏
