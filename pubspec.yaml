@@ -1,6 +1,6 @@
 name: h_basic_utils
 description: A dart package for many helper methods fitting different situations..
-version: 0.0.6
+version: 0.0.7
 homepage: https://github.com/TeacherXue/h_basic_utils
 
 environment:

@@ -55,7 +55,7 @@ class MathUtils {
   static Object? celsiusToFahrenheit<T>(T celsius) {
     if (celsius is num) {
       return num.parse(formatNum(celsius*1.8 + 32, 1));
-    }else if (celsius is String) {
+    }else if (celsius is String && celsius.isNotEmpty) {
       return formatNum(num.parse(celsius)*1.8 + 32, 1);
     }else {
       return null;
@@ -66,7 +66,7 @@ class MathUtils {
   static Object? kwToRt<T>(T kw) {
     if (kw is num) {
       return num.parse(formatNum(kw/3.517, 1));
-    }else if (kw is String) {
+    }else if (kw is String && kw.isNotEmpty) {
       return formatNum(num.parse(kw)/3.517, 1);
     }else {
       return null;
